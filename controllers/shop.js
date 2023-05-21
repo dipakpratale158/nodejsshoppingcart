@@ -10,15 +10,19 @@ exports.getProducts = (req, res, next) => {
   });
 };
 
-////////////////////reditect to hshop page when i am clicking to detail
-exports.getProduct=(req,res,next)=>{
-const  prodctid=req.params.productId
-Product.findById(prodctid, product=>{
-  console.log(product)
-})
-res.redirect('/')
 
-}
+////////////////////reditect to hshop page when i am clicking to detail
+
+exports.getProduct = (req, res, next) => {
+  const productId = req.params.productId;
+  Product.findById(productId, product => {
+    res.render('shop/product-detail', {
+      product: product,
+      pageTitle: product.title,
+      path: '/products'
+    });
+  });
+};
 
 exports.getIndex = (req, res, next) => {
   Product.fetchAll(products => {
