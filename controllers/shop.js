@@ -13,7 +13,9 @@ exports.getProducts = (req, res, next) => {
 ////////////////////reditect to hshop page when i am clicking to detail
 exports.getProduct=(req,res,next)=>{
 const  prodctid=req.params.productId
-console.log(prodctid)
+Product.findById(prodctid, product=>{
+  console.log(product)
+})
 res.redirect('/')
 
 }
