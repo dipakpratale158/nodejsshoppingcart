@@ -4,7 +4,7 @@ exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
-   
+    editing: false
   });
 };
 
@@ -19,19 +19,23 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getEditProduct = (req, res, next) => {
-  const editmode=req.query.edit
-  if(!editmode){
-return res.redirect("/")
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect('/');
   }
-  //if find qury id ok not find undefind
-  res.render('admin/edit-product', {
-    pageTitle: 'Edite Product',
-    path: '/admin/edit-product',
-    editing:editmode
-   
+  const prodId = req.params.productId;
+  Product.findById(prodId, product => {
+    if (!product) {
+      return res.redirect('/');
+    }
+    res.render('admin/edit-product', {
+      pageTitle: 'Edit Product',
+      path: '/admin/edit-product',
+      editing: editMode,
+      product: product
+    });
   });
 };
-
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
