@@ -6,3 +6,7 @@ const sequelize = new Sequelize('nodecomplete', 'root', 'Dipak@12345', {
 })
 
 module.exports = sequelize
+
+
+
+//go to mysql rightclick node-complete refreshall
